@@ -6,3 +6,4 @@ public enum TaskState {
     DONE,
     FAILED
 }
+

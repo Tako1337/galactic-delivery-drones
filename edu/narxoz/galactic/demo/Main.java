@@ -2,9 +2,9 @@ package edu.narxoz.galactic.demo;
 
 import edu.narxoz.galactic.bodies.*;
 import edu.narxoz.galactic.cargo.*;
-import edu.narxoz.galactic.dispatcher.*;
 import edu.narxoz.galactic.drones.*;
 import edu.narxoz.galactic.task.*;
+import edu.narxoz.galactic.dispatcher.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,7 +19,7 @@ public class Main {
 
         DeliveryTask task = new DeliveryTask(earth,mars,cargo);
         Dispatcher dispatcher = new Dispatcher();
-        
+
         System.out.println(dispatcher.assignTask(task, light));
         System.out.println(dispatcher.assignTask(task, heavy));
         System.out.println("Time: " + task.estimateTime());
