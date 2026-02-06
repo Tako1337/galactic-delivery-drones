@@ -1,6 +1,7 @@
 package edu.narxoz.galactic.bodies;
 
 public class SpaceStation extends CelestialBody {
+
     private int level;
 
     public SpaceStation(String name, double x, double y, int level) {
@@ -12,3 +13,4 @@ public class SpaceStation extends CelestialBody {
         return level;
     }
 }
+

@@ -1,15 +1,21 @@
 package edu.narxoz.galactic.cargo;
 
 public class Cargo {
-    private double weightKg;
-    private String description;
 
-    public Cargo(double weightKg, String description) {
-        if (weightKg <= 0) throw new IllegalArgumentException();
+    private String name;
+    private double weightKg;
+
+    public Cargo(double weightKg, String name) {
+        this.name = name;
         this.weightKg = weightKg;
-        this.description = description;
     }
 
-    public double getWeightKg() { return weightKg; }
-    public String getDescription() { return description; }
+    public String getName() {
+        return name;
+    }
+
+    public double getWeightKg() {
+        return weightKg;
+    }
 }
+

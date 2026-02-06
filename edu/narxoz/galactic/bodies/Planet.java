@@ -1,14 +1,16 @@
 package edu.narxoz.galactic.bodies;
 
 public class Planet extends CelestialBody {
-    private String atmosphereType;
 
-    public Planet(String name, double x, double y, String atmosphereType) {
+    private String atmosphere;
+
+    public Planet(String name, double x, double y, String atmosphere) {
         super(name, x, y);
-        this.atmosphereType = atmosphereType;
+        this.atmosphere = atmosphere;
     }
 
-    public String getAtmosphereType() {
-        return atmosphereType;
+    public String getAtmosphere() {
+        return atmosphere;
     }
 }
+

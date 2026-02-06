@@ -5,42 +5,29 @@ import edu.narxoz.galactic.task.*;
 
 public class Dispatcher {
 
-    public Result assignTask(DeliveryTask task, Drone drone) {
-        if (task == null || drone == null)
-            return new Result(false,"Null");
+    public Result assignTask(Drone heavy, DeliveryTask task) {
 
-        if (task.getState() != TaskState.CREATED)
-            return new Result(false,"Task not created");
+        if (heavy.getStatus() != DroneStatus.IDLE) {
+            return new Result(false, "Drone is busy");
+        }
 
-        if (drone.getStatus() != DroneStatus.IDLE)
-            return new Result(false,"Drone not idle");
+        if (task.getCargo().getWeightKg() > heavy.getMaxPayloadKg()) {
+            task.setState(TaskState.FAILED);
+            return new Result(false, "Cargo too heavy");
+        }
 
-        if (task.getCargo().getWeightKg() > drone.getMaxPayloadKg())
-            return new Result(false,"Too heavy");
-
-        task.setAssignedDrone(drone);
+        heavy.setStatus(DroneStatus.IN_FLIGHT);
         task.setState(TaskState.ASSIGNED);
-        drone.setStatus(DroneStatus.IN_FLIGHT);
 
-        return new Result(true,"");
+        return new Result(true, "Task assigned");
     }
 
-    public Result completeTask(DeliveryTask task) {
-        if (task == null)
-            return new Result(false,"Null");
+    public double estimateTime(Drone heavy, double distanceKm) {
+        return distanceKm / heavy.speedKmPerMin();
+    }
 
-        if (task.getState() != TaskState.ASSIGNED)
-            return new Result(false,"Not assigned");
-
-        if (task.getAssignedDrone() == null)
-            return new Result(false,"No drone");
-
-        if (task.getAssignedDrone().getStatus() != DroneStatus.IN_FLIGHT)
-            return new Result(false,"Drone not flying");
-
+    public void completeTask(Drone drone, DeliveryTask task) {
+        drone.setStatus(DroneStatus.IDLE);
         task.setState(TaskState.DONE);
-        task.getAssignedDrone().setStatus(DroneStatus.IDLE);
-
-        return new Result(true,"");
     }
 }
